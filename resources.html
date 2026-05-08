@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krontixz Resources</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --accent-red: #ff3c3c;
+            --accent-blue: #3c64ff;
+            --k-glow: #5dfc5d;
+            --card-bg: #161616;
+            --text: #e0e0e0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text);
+            font-family: 'Segoe UI', sans-serif;
+            padding: 40px;
+            background-image: linear-gradient(rgba(60, 100, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(60, 100, 255, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        .header { text-align: center; margin-bottom: 50px; }
+        .back-btn { 
+            background: none; border: 1px solid var(--accent-blue); color: var(--accent-blue);
+            padding: 8px 15px; cursor: pointer; margin-bottom: 20px; display: none;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .menu-card {
+            background: var(--card-bg);
+            border: 2px solid #333;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .menu-card:hover { border-color: var(--accent-red); transform: translateY(-5px); }
+        .section { display: none; max-width: 1200px; margin: 0 auto; }
+        .active { display: block; }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .item-card {
+            background: var(--card-bg);
+            border: 1px solid #444;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .item-card img, .item-card iframe { width: 100%; border-radius: 4px; background: #000; }
+        .controls { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; }
+        .btn-icon { background: #333; border: none; color: white; padding: 5px 10px; cursor: pointer; border-radius: 3px; }
+        .btn-icon:hover { background: var(--accent-blue); }
+        
+        .folder {
+            background: #1e1e1e;
+            border: 2px solid #ffca28;
+            padding: 20px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .folder::before { content: "📁"; margin-right: 10px; }
+        .folder-content { display: none; padding: 20px; border-top: 1px solid #444; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <button id="backBtn" class="back-btn" onclick="showMenu()">← Back to Categories</button>
+    <h1 style="color: var(--k-glow); font-family: monospace;">KRONTIXZ_RESOURCES</h1>
+</div>
+
+<div id="mainMenu" class="menu-grid">
+    <div class="menu-card" onclick="openSection('sfxSection')"><h2>SOUND EFFECTS</h2></div>
+    <div class="menu-card" onclick="openSection('vfxSection')"><h2>VFX</h2></div>
+    <div class="menu-card" onclick="openSection('thumbSection')"><h2>THUMBNAIL PACKS</h2></div>
+</div>
+
+<section id="sfxSection" class="section">
+    <div class="folder" onclick="toggleFolder('folder1')">
+        EXCLUSIVE SOUND PACK (CLICK TO OPEN)
+        <div id="folder1" class="folder-content resource-grid">
+            <div class="item-card">
+                <p>SFX_Punch</p>
+                <div class="controls">
+                    <button class="btn-icon" onclick="playSound('path/to/sfx1.mp3')">▶️</button>
+                    <a href="path/to/sfx1.mp3" download class="btn-icon">⬇️</a>
+                </div>
+            </div>
+            <div class="item-card">
+                <p>SFX_Explode</p>
+                <div class="controls">
+                    <button class="btn-icon" onclick="playSound('path/to/sfx2.mp3')">▶️</button>
+                    <a href="path/to/sfx2.mp3" download class="btn-icon">⬇️</a>
+                </div>
+            </div>
+            <div class="item-card"><p>SFX_Placeholder</p><div class="controls"><button class="btn-icon">▶️</button><a href="#" class="btn-icon">⬇️</a></div></div>
+            <div class="item-card"><p>SFX_Placeholder</p><div class="controls"><button class="btn-icon">▶️</button><a href="#" class="btn-icon">⬇️</a></div></div>
+            <div class="item-card"><p>SFX_Placeholder</p><div class="controls"><button class="btn-icon">▶️</button><a href="#" class="btn-icon">⬇️</a></div></div>
+        </div>
+    </div>
+</section>
+
+<section id="vfxSection" class="section">
+    <div class="resource-grid">
+        <div class="item-card">
+            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0"></iframe>
+            <p>Glitch Overlay</p>
+            <div class="controls"><a href="path/to/vfx1.mp4" download class="btn-icon">⬇️ Download VFX</a></div>
+        </div>
+        <div class="item-card">
+            <iframe src="" frameborder="0"></iframe>
+            <p>VFX Placeholder 2</p>
+            <div class="controls"><a href="#" download class="btn-icon">⬇️ Download</a></div>
+        </div>
+        <div class="item-card"><p>Placeholder 3</p><div class="controls"><a href="#" download class="btn-icon">⬇️</a></div></div>
+        <div class="item-card"><p>Placeholder 4</p><div class="controls"><a href="#" download class="btn-icon">⬇️</a></div></div>
+        <div class="item-card"><p>Placeholder 5</p><div class="controls"><a href="#" download class="btn-icon">⬇️</a></div></div>
+    </div>
+</section>
+
+<section id="thumbSection" class="section">
+    <div class="resource-grid">
+        <div class="item-card">
+            <img src="path/to/thumb1.jpg" alt="Thumbnail 1">
+            <p>Gaming Pack v1</p>
+            <div class="controls"><a href="path/to/thumb1.jpg" download class="btn-icon">⬇️ Download Pack</a></div>
+        </div>
+        <div class="item-card"><img src="" alt="PH"><p>Placeholder 2</p><div class="controls"><a href="#" download class="btn-icon">⬇️</a></div></div>
+        <div class="item-card"><img src="" alt="PH"><p>Placeholder 3</p><div class="controls"><a href="#" download class="btn-icon">⬇️</a></div></div>
+        <div class="item-card"><img src="" alt="PH"><p>Placeholder 4</p><div class="controls"><a href="#" download class="btn-icon">⬇️</a></div></div>
+        <div class="item-card"><img src="" alt="PH"><p>Placeholder 5</p><div class="controls"><a href="#" download class="btn-icon">⬇️</a></div></div>
+    </div>
+</section>
+
+<script>
+    function openSection(id) {
+        document.getElementById('mainMenu').style.display = 'none';
+        document.getElementById('backBtn').style.display = 'block';
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+
+    function showMenu() {
+        document.getElementById('mainMenu').style.display = 'grid';
+        document.getElementById('backBtn').style.display = 'none';
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    }
+
+    function toggleFolder(id) {
+        const folder = document.getElementById(id);
+        folder.style.display = (folder.style.display === 'grid') ? 'none' : 'grid';
+        event.stopPropagation();
+    }
+
+    function playSound(path) {
+        const audio = new Audio(path);
+        audio.play();
+    }
+</script>
+
+</body>
+</html>
