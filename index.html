@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krontixz Hub</title>
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --sidebar-bg: rgba(15, 15, 15, 0.95);
+            --accent-red: #ff3c3c;
+            --accent-blue: #3c64ff;
+            --k-glow: #5dfc5d;
+            --text-main: #e0e0e0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #sidebar {
+            width: 80px;
+            height: 100%;
+            background: var(--sidebar-bg);
+            border-right: 2px solid var(--accent-blue);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 20px;
+            transition: width 0.3s ease;
+            z-index: 100;
+            box-shadow: 5px 0px 15px rgba(60, 100, 255, 0.2);
+        }
+        #sidebar:hover { width: 240px; }
+        .logo-container {
+            width: 50px;
+            height: 50px;
+            background: #000;
+            border: 2px solid var(--k-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            box-shadow: 0 0 10px var(--k-glow);
+        }
+        .logo-container span {
+            color: var(--k-glow);
+            font-weight: bold;
+            font-size: 1.5rem;
+            font-family: 'Courier New', monospace;
+        }
+        .nav-item {
+            width: 100%;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: #888;
+            transition: 0.2s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-decoration: none;
+        }
+        .nav-item:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--accent-red);
+        }
+        .nav-item i { font-size: 1.5rem; min-width: 40px; font-style: normal; }
+        #main-view {
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto;
+            background-image:
+                linear-gradient(rgba(255, 60, 60, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(60, 100, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .section { display: none; animation: fadeIn 0.4s ease; }
+        .section.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .stream-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 20px;
+            height: 80vh;
+        }
+        .video-player {
+            background: #000;
+            border: 2px solid var(--accent-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 16/9;
+        }
+        .chat-container {
+            background: rgba(20, 20, 20, 0.8);
+            border-left: 2px solid var(--accent-blue);
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-header {
+            padding: 10px;
+            background: var(--accent-blue);
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+        }
+        #chat-feed {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .chat-input-area {
+            padding: 10px;
+            border-top: 1px solid #333;
+            display: flex;
+        }
+        .chat-input-area input {
+            flex-grow: 1;
+            background: #111;
+            border: 1px solid #444;
+            color: #fff;
+            padding: 8px;
+            outline: none;
+        }
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .video-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            transition: 0.3s;
+        }
+        .video-card:hover {
+            border-color: var(--accent-red);
+            transform: scale(1.02);
+        }
+        .thumbnail-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #222;
+        }
+        .tool-box {
+            background: #111;
+            border: 1px dashed var(--accent-blue);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .tool-btn {
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav id="sidebar">
+        <div class="logo-container">
+            <span>K</span>
+        </div>
+        <a href="#" class="nav-item" onclick="showSection('home')">
+            <i>🏠</i> <span>Home</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showSection('stream')">
+            <i>📡</i> <span>Live Stream</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showSection('videos')">
+            <i>🎬</i> <span>Videos</span>
+        </a>
+        <a href="#" class="nav-item" onclick="showSection('tools')">
+            <i>⚒️</i> <span>The Lab</span>
+        </a>
+    </nav>
+    <main id="main-view">
+        <section id="home" class="section active">
+            <h1 style="font-family: 'Courier New', monospace; color: var(--k-glow); font-size: 3rem;">KRONTIXZ</h1>
+            <p style="margin-top: 10px; color: #aaa;">Welcome to the official hub.</p>
+            <div style="margin-top: 40px; padding: 20px; border-left: 4px solid var(--accent-red); background: rgba(255,0,0,0.05);">
+                <h3>Status</h3>
+                <p>System Online</p>
+            </div>
+        </section>
+        <section id="stream" class="section">
+            <div class="stream-grid">
+                <div class="video-player">
+                    <p style="color: #444;">STREAM_PLAYER</p>
+                </div>
+                <div class="chat-container">
+                    <div class="chat-header">Repo: /chat.json</div>
+                    <div id="chat-feed">
+                        <div style="color: var(--k-glow)">[System] Connected.</div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" placeholder="Message...">
+                        <button class="tool-btn" style="padding: 5px 10px; margin-left: 5px;">Send</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="videos" class="section">
+            <h2 style="margin-bottom: 20px;">Archives</h2>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="thumbnail-placeholder"></div>
+                    <div style="padding:15px;"><h4>Video 1</h4></div>
+                </div>
+                <div class="video-card">
+                    <div class="thumbnail-placeholder"></div>
+                    <div style="padding:15px;"><h4>Video 2</h4></div>
+                </div>
+            </div>
+        </section>
+        <section id="tools" class="section">
+            <h2 style="margin-bottom: 20px;">The Lab</h2>
+            <div class="tool-box">
+                <h3>Generator</h3>
+                <button class="tool-btn">Open</button>
+            </div>
+            <div class="tool-box">
+                <h3>Editor</h3>
+                <button class="tool-btn" style="background: var(--accent-blue);">Open</button>
+            </div>
+        </section>
+    </main>
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+    </script>
+</body>
+</html>
