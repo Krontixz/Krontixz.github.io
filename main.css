@@ -38,6 +38,10 @@ body::before {
     font-family: Arial;
 }
 
+#mods-link-container {
+    text-align: center;
+}
+
 #mods-link a {
     color: crimson;
     -webkit-text-stroke: 1px blue;
