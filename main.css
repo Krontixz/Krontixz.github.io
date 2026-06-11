@@ -58,7 +58,7 @@ body::before {
     -webkit-text-stroke: 1px black;
 }
 
-.games-grid {
+.mods-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 30px;
@@ -70,19 +70,19 @@ body::before {
     }
 
     @media (max-width: 1100px) {
-      .games-grid {
+      .mods-grid {
         grid-template-columns: repeat(3, 1fr);
       }
     }
 
     @media (max-width: 850px) {
-      .games-grid {
+      .mods-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
 
     @media (max-width: 550px) {
-      .games-grid {
+      .mods-grid {
         grid-template-columns: 1fr;
       }
     }
