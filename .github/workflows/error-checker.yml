@@ -1,0 +1,43 @@
+name: Check Errors
+on: [push]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Validators
+        run: npm install -g htmlhint stylelint stylelint-config-standard eslint
+
+      - name: Run Checks
+        run: |
+          date +"Timestamp: %Y-%m-%d %H:%M:%S" > errors.txt
+          echo "==============================" >> errors.txt
+          
+          htmlhint "**/*.html" >> errors.txt 2>&1 || true
+          
+          echo "stylelint-config-standard" > .stylelintrc.json
+          stylelint "**/*.css" >> errors.txt 2>&1 || true
+          
+          echo '{"env":{"browser":true,"es2021":true},"extends":"eslint:recommended"}' > .eslintrc.json
+          eslint "**/*.js" >> errors.txt 2>&1 || true
+
+      - name: Commit and Push Errors
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@://github.com"
+          git add errors.txt
+          git commit -m "Update errors.txt with latest validation results" || echo "No changes to commit"
+          git push
+
+      - name: Log
+        run: cat errors.txt
