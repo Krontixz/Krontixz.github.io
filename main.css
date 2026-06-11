@@ -7,14 +7,14 @@
 
 #m-h2 {
   color: blue;
-    -webkit-text-stroke: 3px red;
+    -webkit-text-stroke: 2px red;
     text-align: center;
     font-family: Impact;
 }
 
 #main-p {
     color: crimson;
-     -webkit-text-stroke: 3px red;
+     -webkit-text-stroke: 1px red;
     text-align: center;
-    font-family: Caveat;
+    font-family: Arial;
 }
