@@ -7,7 +7,7 @@
 
 #m-h2 {
   color: blue;
-    -webkit-text-stroke: 3px red;
+    -webkit-text-stroke: 1px red;
     text-align: center;
     font-family: Impact;
 }
