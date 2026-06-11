@@ -1,0 +1,11 @@
+#m-header { 
+    color: red; 
+    font-family: Impact; 
+    text-align: center; 
+  -webkit-text-stroke: 3px black;
+}
+
+#m-h2 {
+  color: blue
+    -webkit-text-stroke: 3px red;
+}
