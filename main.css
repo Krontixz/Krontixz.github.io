@@ -17,6 +17,20 @@ body::before {
     z-index: -1;
 }
 
+#lang_button {
+    position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000
+    color: blue
+    background-color: transparent;
+  color: #28a745;
+  border: none;                  
+  outline: 2px solid #28a745;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
 #m-header { 
     color: red; 
     font-family: Impact; 
