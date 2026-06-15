@@ -152,33 +152,27 @@
             { code: "pt", name: "Portuguese", native: "Português" },
             { code: "ru", name: "Russian", native: "Русский" },
             { code: "ja", name: "Japanese", native: "日本語" },
-            { code: "pa", name: "Punjabi", native: "ਪੰਜਾਬੀ" },
-            { code: "de", name: "German", native: "Deutsch" },
-            { code: "jv", name: "Javanese", native: "Basa Jawa" },
-            { code: "ms", name: "Malay", native: "Bahasa Melayu" },
-            { code: "fr", name: "French", native: "Français" },
-            { code: "te", name: "Telugu", native: "తెలుగు" },
-            { code: "vi", name: "Vietnamese", native: "Tiếng Việt" },
-            { code: "ko", name: "Korean", native: "한국어" },
-            { code: "mr", name: "Marathi", native: "मराठी" },
-            { code: "ta", name: "Tamil", native: "தமிழ்" },
-            { code: "ur", name: "Urdu", native: "اُردُو" },
-            { code: "tr", name: "Turkish", native: "Türkçe" },
-            { code: "it", name: "Italian", native: "Italiano" },
-            { code: "th", name: "Thai", native: "ไทย" },
-            { code: "gu", name: "Gujarati", native: "ગુજરાતી" },
-            { code: "fa", name: "Persian", native: "فارسی" },
-            { code: "pl", name: "Polish", native: "Polski" },
-            { code: "uk", name: "Ukrainian", native: "Українська" },
-            { code: "nl", name: "Dutch", native: "Nederlands" },
-            { code: "fil", name: "Filipino", native: "Pilipino" }
+            { code: "fr", name: "French", native: "Français" }
         ];
 
         const repoFilesMapping = {
-            "en": "index.html",
-            "es": "es/index.html",
-            "zh": "zh/index.html"
+            "en": "",
+            "zh": "zh/",
+            "es": "es/",
+            "hi": "hi/",
+            "ar": "ar/",
+            "bn": "bn/",
+            "pt": "pt/",
+            "ru": "ru/",
+            "ja": "ja/",
+            "fr": "fr/"
         };
+
+        const supportedFiles = [
+            "index.html",
+            "languages.html",
+            "mods.html"
+        ];
 
         const grid = document.getElementById('languageGrid');
 
@@ -197,8 +191,20 @@
         });
 
         function handleLanguageChange(langCode) {
-            const destination = repoFilesMapping[langCode] || repoFilesMapping["en"];
-            window.location.href = destination;
+            const referrer = document.referrer;
+            let currentFile = "index.html";
+
+            if (referrer) {
+                const urlParts = referrer.split('/');
+                const lastPart = urlParts[urlParts.length - 1].split('?')[0].split('#')[0];
+                
+                if (supportedFiles.includes(lastPart)) {
+                    currentFile = lastPart;
+                }
+            }
+
+            const folderPrefix = repoFilesMapping[langCode] !== undefined ? repoFilesMapping[langCode] : "";
+            window.location.href = folderPrefix + currentFile;
         }
     </script>
 </body>
