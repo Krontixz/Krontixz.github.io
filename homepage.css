@@ -1,0 +1,13 @@
+#krontixz-main-content {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 128px;
+  height: 256px;
+  border: 2px solid #00ff00;
+  box-shadow: 0 0 10px #00ff00,
+  0 0 20px #00ff00, 
+  0 0 40px #00ff00;
+  font-family: Impact, Sans-Serif;
+}
