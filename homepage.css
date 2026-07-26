@@ -9,5 +9,13 @@
   box-shadow: 0 0 10px #00ff00,
   0 0 20px #00ff00, 
   0 0 40px #00ff00;
-  font-family: Impact, Sans-Serif;
 }
+
+.krontixz-main-text {
+  font-family: Impact, Sans-Serif;
+  position: absolute;
+  top: 0;
+  left: 50%
+  transform: translateX(-50%);
+}
+  
